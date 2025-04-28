@@ -1,3 +1,39 @@
+# Desafio Batalha Naval
+# Três Níveis de Complexidade.
+</div>
+  <div style="display: inline_block"><br>
+  <img height="250" width="850" src="https://www.noas.com.br/ensino-fundamental-1/matematica/batalha-naval/batalhanaval.png" />
+</div>
+
+# COMPILAÇÃO:
+
+🛠️ Pré-requisitos
+- Tenha o compilador C instalado.
+- No Linux/macOS, o GCC geralmente já está disponível ou pode ser instalado com um comando.
+
+- Linux (Debian/Ubuntu): sudo apt install build-essential
+- macOS: xcode-select --install
+- Windows: Use o MinGW ou o WSL com GCC
+
+1. Abra o terminal ou prompt de comando
+2. Navegue até a pasta onde está seu arquivo
+3. Compile com o GCC
+```shell 
+cd /caminho/para/o/arquivo
+```
+```shell 
+gcc programa.c -o programa
+```
+4. Execute o programa compilado
+No Linux/macOS:
+```shell 
+./programa
+```
+No Windows:
+```shell 
+programa.exe
+```
+
 # ⚠️ Importante!!!
 Você pode escolher qualquer um dos desafios para desenvolver. Sinta-se à vontade para começar pelo desafio que mais lhe interessa.
 
