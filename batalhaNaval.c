@@ -2,67 +2,53 @@
 // Este código inicial serve como base para o desenvolvimento do sistema de Batalha Naval.
 // Siga os comentários para implementar cada parte do desafio.
 
-#include <stdio.h>  // Inclui biblioteca padrão de entrada e saída
+#include <stdio.h>
 
 #define TAMANHO 10  // Define o tamanho do tabuleiro (10x10)
 
 int main() {
-    int tabuleiro[TAMANHO][TAMANHO]; // Cria o tabuleiro
+    int tabuleiro[TAMANHO][TAMANHO] = {0};  // Cria o tabuleiro e preenche com 0 (água)
 
-    // Inicializa o tabuleiro preenchendo tudo com 0 (água)
-    for (int i = 0; i < TAMANHO; i++) {
-        for (int j = 0; j < TAMANHO; j++) {
-            tabuleiro[i][j] = 0;
-        }
+    // === DESENHA UMA CRUZ 5x5 COM O NÚMERO 3 ===
+    // A cruz tem um traço vertical e um horizontal que se cruzam no meio
+    int centro_linha = 2, centro_coluna = 2;  // Define o centro da cruz
+    for (int i = centro_linha - 2; i <= centro_linha + 2; i++) {
+        if (i >= 0 && i < TAMANHO)
+            tabuleiro[i][centro_coluna] = 3;  // Linha vertical da cruz
+    }
+    for (int j = centro_coluna - 2; j <= centro_coluna + 2; j++) {
+        if (j >= 0 && j < TAMANHO)
+            tabuleiro[centro_linha][j] = 3;  // Linha horizontal da cruz
     }
 
-    // Posicionar navios HORIZONTAIS/VERTICAIS (valor 3)
-    // Navio horizontal (linha 2, colunas 1-4)
-    for (int j = 1; j <= 4; j++) {
-        tabuleiro[1][j] = 3;
-    }
+    // === DESENHA UM TRIÂNGULO COM O NÚMERO 1 ===
+    // A base está na linha 9 e ele vai afunilando para o topo
+    tabuleiro[6][3] = 1;
+    tabuleiro[7][2] = 1; tabuleiro[7][3] = 1; tabuleiro[7][4] = 1;
+    tabuleiro[8][1] = 1; tabuleiro[8][2] = 1; tabuleiro[8][3] = 1;
+    tabuleiro[8][4] = 1; tabuleiro[8][5] = 1;
 
-    // Navio vertical (coluna 7, linhas 5-8)
-    for (int i = 5; i <= 8; i++) {
-        tabuleiro[i][7] = 3;
-    }
+    // === DESENHA UM LOSANGO COM O NÚMERO 2 ===
+    // O centro está em (5,7), com camadas que formam o losango
+    tabuleiro[3][7] = 2;
+    tabuleiro[4][6] = 2; tabuleiro[4][7] = 2; tabuleiro[4][8] = 2;
+    tabuleiro[5][5] = 2; tabuleiro[5][6] = 2; tabuleiro[5][7] = 2;
+    tabuleiro[5][8] = 2; tabuleiro[5][9] = 2;
+    tabuleiro[6][6] = 2; tabuleiro[6][7] = 2; tabuleiro[6][8] = 2;
+    tabuleiro[7][7] = 2;
 
-    // Posicionar navios DIAGONAIS
-    // Navio diagonal principal (linha=coluna), posições 0-3
-    for (int i = 0; i <= 3; i++) {
-        if (tabuleiro[i][i] == 0) { // Verifica para não sobrepor
-            tabuleiro[i][i] = 3;
-        }
-    }
-
-    // Navio diagonal secundária (linha+i, coluna=9-i), posições 6-9
-    for (int i = 6; i <= 9; i++) {
-        int coluna = 9 - i; // Cálculo da coluna da diagonal secundária
-        if (tabuleiro[i][coluna] == 0) { // Verifica para não sobrepor
-            tabuleiro[i][coluna] = 3;
-        }
-    }
-
-    // Imprime o título do tabuleiro
+    // === IMPRIME O TÍTULO E O CABEÇALHO ===
     printf("TABULEIRO BATALHA NAVAL\n");
-
-    // Imprime o cabeçalho de letras
     printf("   A B C D E F G H I J\n");
 
-    // Imprime o tabuleiro
+    // === IMPRIME O TABULEIRO COM OS NÚMEROS ===
     for (int i = 0; i < TAMANHO; i++) {
-        if (i < 9) {
-            printf(" %d ", i + 1); // Para linhas 1-9
-        } else {
-            printf("%d ", i + 1); // Linha 10
-        }
-
+        printf("%2d ", i + 1);  // Mostra o número da linha
         for (int j = 0; j < TAMANHO; j++) {
-            printf("%d ", tabuleiro[i][j]); // Imprime cada posição
+            printf("%d ", tabuleiro[i][j]);  // Mostra o valor de cada célula
         }
-
-        printf("\n"); // Quebra de linha no final de cada linha
+        printf("\n");  // Pula para a próxima linha
     }
 
-    return 0; // Finaliza o programa
+    return 0;  // Fim do programa
 }
