@@ -2,46 +2,67 @@
 // Este código inicial serve como base para o desenvolvimento do sistema de Batalha Naval.
 // Siga os comentários para implementar cada parte do desafio.
 
-#include <stdio.h>  // Inclui a biblioteca padrão de entrada e saída
+#include <stdio.h>  // Inclui biblioteca padrão de entrada e saída
+
+#define TAMANHO 10  // Define o tamanho do tabuleiro (10x10)
 
 int main() {
-    int tabuleiro[10][10]; // Declara uma matriz 10x10 para representar o tabuleiro
+    int tabuleiro[TAMANHO][TAMANHO]; // Cria o tabuleiro
 
-    // Inicializa o tabuleiro preenchendo todas as posições com 0
-    for (int i = 0; i < 10; i++) {         // Loop para percorrer as linhas
-        for (int j = 0; j < 10; j++) {      // Loop para percorrer as colunas
-            tabuleiro[i][j] = 0;            // Atribui o valor 0 a cada posição
+    // Inicializa o tabuleiro preenchendo tudo com 0 (água)
+    for (int i = 0; i < TAMANHO; i++) {
+        for (int j = 0; j < TAMANHO; j++) {
+            tabuleiro[i][j] = 0;
         }
     }
 
-    // Preenche a linha 3, colunas D, E e F com o número 3
-    for (int j = 3; j <= 5; j++) { // Colunas D (índice 3), E (4) e F (5)
-        tabuleiro[2][j] = 3;       // Linha 3 no tabuleiro é índice 2 (pois começa em 0)
+    // Posicionar navios HORIZONTAIS/VERTICAIS (valor 3)
+    // Navio horizontal (linha 2, colunas 1-4)
+    for (int j = 1; j <= 4; j++) {
+        tabuleiro[1][j] = 3;
+    }
+
+    // Navio vertical (coluna 7, linhas 5-8)
+    for (int i = 5; i <= 8; i++) {
+        tabuleiro[i][7] = 3;
+    }
+
+    // Posicionar navios DIAGONAIS
+    // Navio diagonal principal (linha=coluna), posições 0-3
+    for (int i = 0; i <= 3; i++) {
+        if (tabuleiro[i][i] == 0) { // Verifica para não sobrepor
+            tabuleiro[i][i] = 3;
+        }
+    }
+
+    // Navio diagonal secundária (linha+i, coluna=9-i), posições 6-9
+    for (int i = 6; i <= 9; i++) {
+        int coluna = 9 - i; // Cálculo da coluna da diagonal secundária
+        if (tabuleiro[i][coluna] == 0) { // Verifica para não sobrepor
+            tabuleiro[i][coluna] = 3;
+        }
     }
 
     // Imprime o título do tabuleiro
     printf("TABULEIRO BATALHA NAVAL\n");
 
-    // Imprime o cabeçalho com as letras de A a J, bem alinhado
-    printf("   A B C D E F G H I J\n"); // Note 3 espaços antes para alinhar
+    // Imprime o cabeçalho de letras
+    printf("   A B C D E F G H I J\n");
 
-    // Imprime o corpo do tabuleiro linha por linha
-    for (int i = 0; i < 10; i++) { // Loop para cada linha do tabuleiro
+    // Imprime o tabuleiro
+    for (int i = 0; i < TAMANHO; i++) {
         if (i < 9) {
-            // Para linhas de 1 a 9: imprime o número seguido de espaço (ex: " 1 ")
-            printf(" %d ", i + 1);
+            printf(" %d ", i + 1); // Para linhas 1-9
         } else {
-            // Para a linha 10: imprime o número sem espaço extra (ex: "10 ")
-            printf("%d ", i + 1);
+            printf("%d ", i + 1); // Linha 10
         }
-        
-        // Imprime todas as colunas daquela linha
-        for (int j = 0; j < 10; j++) {
-            printf("%d ", tabuleiro[i][j]); // Imprime o valor da célula com espaço depois
+
+        for (int j = 0; j < TAMANHO; j++) {
+            printf("%d ", tabuleiro[i][j]); // Imprime cada posição
         }
-        
-        printf("\n"); // Pula para a próxima linha após imprimir todas as colunas
+
+        printf("\n"); // Quebra de linha no final de cada linha
     }
 
-    return 0; // Finaliza o programa com sucesso
+    return 0; // Finaliza o programa
 }
